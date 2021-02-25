@@ -1,21 +1,54 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from "expo-status-bar";
+import React, { useEffect, useState } from "react";
+import { StyleSheet, Text, View } from "react-native";
+import WelcomeScreen from "./app/screens/WelcomeScreen";
+import HomePage from "./app/screens/HomePage";
+import LoginScreen from "./app/screens/LoginScreen";
+import SignupScreen from "./app/screens/SignupScreen";
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+import {
+  createStackNavigator,
+} from 'react-navigation-stack';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+import { createAppContainer } from 'react-navigation';
+import Profile from "./app/screens/Profile";
+
+
+const RootStack = createStackNavigator({
+  WelcomeScreen: {
+    screen: WelcomeScreen,
+    navigationOptions:{
+      headerShown: false
+    }
   },
+  HomePage: {
+    screen: HomePage,
+    // navigationOptions:{
+    //   headerShown: false
+    // }
+  },
+  LoginScreen:{
+    screen: LoginScreen,
+    navigationOptions:{
+      headerShown: false
+    }
+  },
+  SignupScreen:{
+    screen: SignupScreen,
+    navigationOptions:{
+      headerShown: false
+    }
+  },
+  Profile:{
+    screen: Profile,
+    navigationOptions:{
+      headerShown: false
+    }
+  },
+
 });
+
+const App = createAppContainer(RootStack);
+
+export default App;
+
