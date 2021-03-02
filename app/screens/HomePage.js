@@ -1,10 +1,5 @@
 import React, { PureComponent } from "react";
-import {
-  StyleSheet,
-  View,
-  FlatList,
-  ActivityIndicator,
-} from "react-native";
+import { StyleSheet, View, FlatList, ActivityIndicator, Text } from "react-native";
 import { Card } from "./Components/Card";
 
 export default class HomePage extends React.Component {
@@ -12,18 +7,30 @@ export default class HomePage extends React.Component {
     super(props);
     this.state = {
       items: [],
-      loading: true
+      loading: true,
+      data: false,
     };
   }
 
-  async componentDidMount() {
-   const url = "https://jsonplaceholder.typicode.com/posts/1/comments";
-   const response = await fetch(url);
-   let data = await response.json();
-   this.state.items = data;
-   this.state.loading = false;
-   console.log(this.state.items[0]);
-    this.render();
+  componentDidMount() {
+   this.getData();
+  }
+
+  
+
+  async getData(){
+    const url = "https://jsonplaceholder.typicode.com/posts/1/comments";
+    const response = await fetch(url);
+    let data = await response.json();
+
+    console.log(data);
+    this.setState({
+      items: data
+    })
+
+    console.log(this.state.items[0]);
+    console.log("hello");
+
   }
 
 
@@ -33,23 +40,19 @@ export default class HomePage extends React.Component {
     // const number = this.props.navigation.getParam("number", "");
     // const password = this.props.navigation.getParam("password", "");
     // console.log(email, name, number, password);
-    console.log(this.state.items.length);
-   
-      return (
-        <View>
-          <FlatList
+    console.log("reew");
+
+    return (
+      <View>
+        {/* <FlatList
           style={styles.container}
           data={this.state.items}
-          keyExtractor={(item,index) => index.toString()}
-          renderItem={({item}) => <Card item={item}></Card>}
-          >
-  
-          </FlatList>
-        </View>
-      );
-    
-
-  
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({ item }) => <Card item={item}></Card>}
+        ></FlatList> */}
+        <Text>{this.state.items}</Text>
+      </View>
+    );
   }
 }
 
